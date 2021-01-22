@@ -7,7 +7,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
  * Texture
  */
 
- const image = new Image()
+ /*const image = new Image()
 const texture = new THREE.Texture(image)
 
  image.onload = () =>{
@@ -15,8 +15,50 @@ const texture = new THREE.Texture(image)
  }
 
  image.src = '/textures/door/color.jpg'
+*/
+
+const loadingManager = new THREE.LoadingManager()
+loadingManager.onStart = () =>
+{
+    console.log('loading started')
+}
+loadingManager.onLoaded = () =>
+{
+    console.log('loading finished')
+}
+loadingManager.onProgress = () =>
+{
+    console.log('loading progressing')
+}
+loadingManager.onError = () =>
+{
+    console.log('loading error')
+}
 
 
+const textureLoader = new THREE.TextureLoader(loadingManager)
+
+//const colorTexture = textureLoader.load('/textures/door/color.jpg')
+const colorTexture = textureLoader.load('/textures/minecraft.png')
+const alphaTexture = textureLoader.load('/textures/door/alpha.jpg')
+const heightTexture = textureLoader.load('/textures/door/height.jpg')
+const normalTexture = textureLoader.load('/textures/door/normal.jpg')
+const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
+const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
+const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
+
+
+// manipulation texture
+//colorTexture.repeat.x = 2
+//colorTexture.repeat.y = 3
+//colorTexture.wrapS= THREE.RepeatWrapping
+//colorTexture.wrapT= THREE.RepeatWrapping
+
+//colorTexture.offset.x = .4
+// With NearestFilter we don't need Mimpas -> better perfs
+colorTexture.generateMipmaps = false
+colorTexture.minFilter = THREE.NearestFilter
+colorTexture.magFilter = THREE.NearestFilter
 
 /**
  * Base
@@ -31,7 +73,7 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ map: texture})
+const material = new THREE.MeshBasicMaterial({ map: colorTexture})
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
