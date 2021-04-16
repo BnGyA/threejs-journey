@@ -300,7 +300,6 @@ ghost3.shadow.camera.far = 7
 // ...
 
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
-
 renderer.shadowMap.enabled = true;
 /**
  * Animate

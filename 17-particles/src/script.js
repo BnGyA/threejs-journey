@@ -126,7 +126,7 @@ const tick = () => {
         particlesGeometry.attributes.position.array[i3 + 1] = Math.sin(elapsedTime + x);
     }
 
-    particlesGeometry.attributes.position.needsUpdate = true;
+    particlesGegeometryometry.attributes.position.needsUpdate = true;
     
 
     // Update controls
